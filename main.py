@@ -32,6 +32,16 @@ def stub():
     return render_template("stub.html")
 
 
+@app.route('/login/')
+def login():
+    return render_template("login.html")
+
+
+@app.route('/logout/')
+def logout():
+    return render_template("logout.html")
+
+
 # runs the application on the development server
 if __name__ == "__main__":
     app.run(debug=True)

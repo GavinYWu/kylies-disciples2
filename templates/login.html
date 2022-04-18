@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+{% extends "layouts/base.html" %}
+<html lang="en">
+<meta charset="UTF-8">
+{% block body %}
+
+
+    <div class="container">
+        <br>
+        <h4 style="color: white">Sign Up with an Email and Password:</h4>
+        <br>
+        <form id="register">
+            <br />
+            <input
+                    style="text-align: center"
+                    type="text"
+                    id="email"
+                    name="email"
+                    placeholder="Email"
+                    class="form-control"
+            />
+            <br />
+            <input
+                    style="text-align: center"
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="Password"
+                    class="form-control"
+            />
+            <br />
+            <input
+                    style="text-align: center"
+                    class="btn btn-primary loginbtn"
+                    type="submit"
+                    value="Register"
+            />
+        </form>
+        <input
+                style="text-align: center"
+                class="btn btn-primary loginbtn"
+                type="submit"
+                onclick="login()"
+                value="Already have an account?"
+        />
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-firestore.js"></script>
+        <script>
+            const config = {
+                apiKey: "AIzaSyDlLyw_zNfech3CumwNxqct4EPhTT6oqHo",
+                authDomain: "hackers-8d876.firebaseapp.com",
+                projectId: "hackers-8d876",
+                storageBucket: "hackers-8d876.appspot.com",
+                messagingSenderId: "337033111635",
+                appId: "1:337033111635:web:e47fc64f0fc5528a38bea6",
+                measurementId: "G-RSNZWY27F3"
+            };
+            if (firebase.apps.length === 0) {``
+                firebase.initializeApp(config);
+                console.log("worked");
+            }
+            const auth = firebase.auth();
+            var form = document.getElementById("register");
+            var submit = document.getElementById("submit");
+
+            form.onsubmit = function (e) {
+                e.preventDefault();
+                const email = form["email"].value;
+                const password = form["password"].value;
+                auth.createUserWithEmailAndPassword(email, password).then(function (){
+                    console.log('signed uppathname successfully')
+                    window.location.pathname = '/login'
+                }).catch((err) => {
+                    if (err.code === "auth/email-already-in-use") {
+                        window.location.pathname = "/login/"
+                    }
+                    if (err.code === "auth/weak-password") {
+                        window.location.pathname = "/login/"
+                    }
+                    else if (err.code === "auth/invalid-email") {
+                        window.location.pathname = "/login/"
+                    }
+                });
+            };
+            function login() {
+                window.location.pathname = "/login/"
+            }
+        </script>
+    </div>
+
+{% endblock %}
+<!- This is turning off birds background from base.html -->
+{% block background %}
+{% endblock %}
+</html>
