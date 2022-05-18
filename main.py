@@ -15,7 +15,7 @@ def index():
 @app.route('/kangaroos/')
 def kangaroos():
     return render_template("kangaroos.html")
-
+ 
 
 @app.route('/walruses/')
 def walruses():
@@ -41,6 +41,9 @@ def login():
 def logout():
     return render_template("logout.html")
 
+@app.route('/feedback/', methods=['GET', 'POST'])
+def feedback():
+    return render_template("layouts/feedback.html")
 
 # runs the application on the development server
 if __name__ == "__main__":
