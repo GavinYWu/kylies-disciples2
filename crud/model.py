@@ -1,8 +1,20 @@
 """ database dependencies to support Users db examples """
+from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.exc import IntegrityError
-from __init__ import db
+from flask_migrate import Migrate
+
+from __init__ import app
 
 # Tutorial: https://www.sqlalchemy.org/library.html#tutorials, try to get into Python shell and follow along
+# Define variable to define type of database (sqlite), and name and location of myDB.db
+dbURI = 'sqlite:///model/myDB.db'
+# Setup properties for the database
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SQLALCHEMY_DATABASE_URI'] = dbURI
+app.config['SECRET_KEY'] = 'SECRET_KEY'
+# Create SQLAlchemy engine to support SQLite dialect (sqlite:)
+db = SQLAlchemy(app)
+Migrate(app, db)
 
 
 # Define the Users table within the model
@@ -14,16 +26,18 @@ class Users(db.Model):
     # define the Users schema
     userID = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255), unique=False, nullable=False)
-    email = db.Column(db.String(255), unique=True, nullable=False)
-    password = db.Column(db.String(255), unique=False, nullable=False)
-    phone = db.Column(db.String(255), unique=False, nullable=False)
+    fav_res = db.Column(db.String(255), unique=False, nullable=False)
+    fav_food = db.Column(db.String(255), unique=False, nullable=False)
+
+
 
     # constructor of a User object, initializes of instance variables within object
-    def __init__(self, name, email, password, phone):
+    def __init__(self, name, fav_res, fav_food):
         self.name = name
-        self.email = email
-        self.password = password
-        self.phone = phone
+        self.fav_res = fav_res
+        self.fav_food = fav_food
+
+
 
     # CRUD create/add a new record to the table
     # returns self or None on error
@@ -43,22 +57,21 @@ class Users(db.Model):
         return {
             "userID": self.userID,
             "name": self.name,
-            "email": self.email,
-            "password": self.password,
-            "phone": self.phone,
-            "query": "by_alc"  # This is for fun, a little watermark
+            "fav_res": self.fav_res,
+            "fav_food": self.fav_food,
         }
 
-    # CRUD update: updates users name, password, phone
+    # CRUD update: updates users name, res, food
     # returns self
-    def update(self, name, password="", phone=""):
+    def update(self, name, fav_res="", fav_food=""):
         """only updates values with length"""
         if len(name) > 0:
             self.name = name
-        if len(password) > 0:
-            self.password = password
-        if len(phone) > 0:
-            self.phone = phone
+        if len(fav_res) > 0:
+            self.fav_res = fav_res
+        if len(fav_food) > 0:
+            self.fav_food = fav_food
+
         db.session.commit()
         return self
 
@@ -79,22 +92,19 @@ def model_tester():
     print("--------------------------")
     db.create_all()
     """Tester data for table"""
-    u1 = Users(name='Thomas Edison', email='tedison@example.com', password='123toby', phone="1111111111")
-    u2 = Users(name='Nicholas Tesla', email='ntesla@example.com', password='123niko', phone="1111112222")
-    u3 = Users(name='Alexander Graham Bell', email='agbell@example.com', password='123lex', phone="1111113333")
-    u4 = Users(name='Eli Whitney', email='eliw@example.com', password='123whit', phone="1111114444")
-    u5 = Users(name='John Mortensen', email='jmort1021@gmail.com', password='123qwerty', phone="8587754956")
-    u6 = Users(name='John Mortensen', email='jmort1021@yahoo.com', password='123qwerty', phone="8587754956")
-    # U7 intended to fail as duplicate key
-    u7 = Users(name='John Mortensen', email='jmort1021@yahoo.com', password='123qwerty', phone="8586791294")
-    table = [u1, u2, u3, u4, u5, u6, u7]
+    u1 = Users(name='Aadya Daita', fav_res='subway', fav_food='Italian')
+    u2 = Users(name='Athena Wu', fav_res='subway', fav_food='Italian')
+    u3 = Users(name='Gaurish Gaur', fav_res='subway', fav_food='Italian')
+    u4 = Users(name='Karthik Valluri', fav_res='subway', fav_food='Italian')
+
+    table = [u1, u2, u3, u4]
     for row in table:
         try:
             db.session.add(row)
             db.session.commit()
         except IntegrityError:
             db.session.remove()
-            print(f"Records exist, duplicate email, or error: {row.email}")
+
 
 
 def model_printer():
