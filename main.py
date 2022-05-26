@@ -62,6 +62,12 @@ def page_not_found(e):
 def holidaydec():
     return render_template("holidaydec.html")
 
+
+@app.route('/calendar/')
+def calendar():
+    return render_template("calendar.html")
+
+
 # runs the application on the development server
 if __name__ == "__main__":
     app.run(debug=True)
