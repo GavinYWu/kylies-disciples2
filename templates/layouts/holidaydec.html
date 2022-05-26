@@ -1,0 +1,16 @@
+import requests
+
+url = "https://reddit3.p.rapidapi.com/subreddit"
+
+querystring = {"url":"https://www.reddit.com/r/wallstreetbets","filter":"hot"}
+
+headers = {
+"X-RapidAPI-Host": "reddit3.p.rapidapi.com",
+"X-RapidAPI-Key": "SIGN-UP-FOR-KEY"
+}
+
+response = requests.request("GET", url, headers=headers, params=querystring)
+
+print(response.text)
+
+

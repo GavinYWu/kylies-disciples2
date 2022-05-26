@@ -58,6 +58,10 @@ def page_not_found(e):
     return render_template('404.html'), 404
 
 
+@app.route('/holidaydec/')
+def holidaydec():
+    return render_template("holidaydec.html")
+
 # runs the application on the development server
 if __name__ == "__main__":
     app.run(debug=True)
