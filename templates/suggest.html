@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Holiday Suggestions</title>
+    <style>
+        .formBox{
+            padding: 0.5rem 2rem;
+        }
+    </style>
+</head>
+<body>
+<h2>Give us your Holiday Decoration Ideas Below!</h2>
+<form>
+    <div class="formBox">
+        <label for="holiday">Holiday</label>
+        <input type="text" id="holiday" placeholder="Holiday"/>
+    </div>
+    <div class="formBox">
+        <label for="decorations">Decorations</label>
+        <textarea type="text" id="decorations" placeholder="Ex: Balloons, Streamers, Confetti"> </textarea>
+    </div>
+    <div class="formBox">
+        <button id="btn">Click to Add</button>
+    </div>
+    <div id="msg">
+        <pre></pre>
+    </div>
+</form>
+<script>
+    let ideas = [];
+    const addidea = (ev)=>{
+        ev.preventDefault();  //to stop the form submitting
+        let idea = {
+            holiday: document.getElementById('holiday').value,
+            decorations: document.getElementById('decorations').value
+        }
+        ideas.push(idea);
+        document.forms[0].reset(); // to clear the form for the next entries
+        //document.querySelector('form').reset();
+
+        //for display purposes only
+        console.warn('added' , {ideas} );
+        let pre = document.querySelector('#msg pre');
+        pre.textContent = '\n' + JSON.stringify(ideas, '\t', 2);
+
+        //saving to localStorage
+        localStorage.setItem('ideaList', JSON.stringify(ideas) );
+    }
+    document.addEventListener('DOMContentLoaded', ()=>{
+        document.getElementById('btn').addEventListener('click', addidea);
+    });
+</script>
+</body>
+</html>

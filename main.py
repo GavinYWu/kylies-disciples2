@@ -41,9 +41,16 @@ def login():
 def logout():
     return render_template("logout.html")
 
-@app.route('/feedback/', methods=['GET', 'POST'])
+
+@app.route('/feedback/')
 def feedback():
-    return render_template("layouts/feedback.html")
+    return render_template("Feedback.php")
+
+
+@app.route('/suggest/')
+def suggest():
+    return render_template("suggest.html")
+
 
 @app.errorhandler(404)
 def page_not_found(e):
