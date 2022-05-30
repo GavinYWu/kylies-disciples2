@@ -1,14 +1,21 @@
 # import "packages" from flask
-from flask import Flask, render_template
+from flask import Flask, render_template, request
+import requests, json
+from __init__ import app
+from holidaydecor.app_crud import app_crud
+app.register_blueprint(app_crud)
 
-# create a Flask instance
-app = Flask(__name__)
 
 
 # connects default URL to render index.html
 @app.route('/')
 def index():
     return render_template("index.html")
+
+
+@app.route('/pagelayout/')
+def pl():
+    return render_template("layouts/pagelayout.html")
 
 
 # connects /kangaroos path to render kangaroos.html

@@ -1,4 +1,6 @@
+{% extends "layouts/base.html" %}
 <!DOCTYPE html>
+{% block body %}
 <title>Feedback Form</title>
 
 <h1>Feedback Form</h1>
@@ -98,3 +100,4 @@ else {
     </p>
     <p><button>Submit the form</button></p>
 </form>
+{% endblock %}
