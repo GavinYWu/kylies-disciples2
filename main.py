@@ -75,6 +75,10 @@ def calendar():
     return render_template("calendar.html")
 
 
+@app.route('/newsletter/')
+def newsletter():
+    return render_template("newsletter.html")
+
 # runs the application on the development server
 if __name__ == "__main__":
     app.run(debug=True)
