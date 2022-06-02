@@ -1,10 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+{% extends "layouts/base.html" %}
+{% block title %}Page Not Found{% endblock %}
+{% block body %}
+<h1>Oops! Looks like the page doesn't exist anymore</h1>
+<p><a href="{{ url_for('index') }}">Click Here</a> to go to the Home Page</p>
+{% endblock %}
