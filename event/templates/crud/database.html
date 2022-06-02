@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+
+<!-- EXTEND (navbar2.html), this is a template for the calendar feature -->
+{% extends "layouts/pagelayout.html" %}
+{% set page_title = "Calendar Page" %}
+{% set page_description = "Events Database" %}
+
+<!-- CONTENT (in <head>), content for this page -->
+<title>Calendar Page</title>
+
+<!-- CONTENT (in <body>), content for this page -->
+
+{% block content %}
+    <div class="container py-4 text-light bg-success">
+        <header class="pb-3 mb-4 border-bottom">
+            <div class="d-flex align-items-center text-light text-decoration-none">
+                <span class="fs-4">Calendar Feature</span>
+            </div>
+        </header>
+
+        <div class="container py-4">
+            <div class="p-5 mb-4 bg-light text-dark rounded-3">
+                <h2>Table Viewer</h2>
+                <div class="row align-items-md-stretch">
+                    <table class="table">
+                        <tbody>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td><a href={{url_for('event.crud')}}>Full Table </a></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="row align-items-md-stretch">
+                    <div class="container-fluid py-5">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Date</th>
+                                <th>Event</th>
+                                <th>Description</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <!-- Loop through rows in table -->
+                            {% for row in table %}
+                                <!--
+                                Prepare table for display
+                                    caution: phone number needs "~" format step to force type to string
+                                -->
+                                {% set pn = "" ~ row['phone'] %}
+                                {% set pnf = "(" ~ pn[0:3] ~ ")" ~ pn[3:6] ~ "-" ~ pn[6:10] %}
+                                <tr>
+                                    <td>{{ row['eventID'] }}</td>
+                                    <td>{{ row['Date'] }}</td>
+                                    <td>{{ row['Event'] }}</td>
+                                    <td>{{ row['description'] }}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="container py-4">
+            <div class="p-5 mb-4 bg-light text-dark">
+                <h2>Create a new event</h2>
+                <form method="POST" ID="create" action={{url_for('event.create')}} >
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th><label for="date">Date</label></th>
+                            <th><label for="event">Event</label></th>
+                            <th><label for="description">Description</label></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td><input type="text" name="date" id="date" required></td>
+                            <td><input type="text" name="event" id="event" required></td>
+                            <td><input type="text" name="description" id="description" required></td>
+                            <td><input type="submit" value="Create"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <p id="pswError"></p>
+                </form>
+            </div>
+
+        </div>
+
+        <div class="container py-4">
+
+            <div class="row mb-4 bg-light text-dark rounded-3">
+
+                <div class="col-md-3">
+                    <div class="p-5 mb-4 bg-light text-dark rounded-3">
+                        <h2>Read</h2>
+                        <form method="POST" ID="read" action={{url_for('event.read')}} >
+                            <table id="read_table">
+                                <tr><th><label for="read_event">Date</label></th></tr>
+                                <tr>
+                                    <td>
+                                        <select name="eventID" id="read_event">
+                                            <optgroup label="eventID">
+                                                {% for row in table %}
+                                                    <option label="{{ row['eventID'] }}">{{ row['eventID'] }}</option>
+                                                {% endfor %}
+                                            </optgroup>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <input type="submit" value="Read">
+                                    </td>
+                                </tr>
+                            </table>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="p-5 mb-4 bg-light text-dark rounded-3">
+                        <h2>Update</h2>
+                        <form method="POST" ID="update" action={{url_for('event.update')}} >
+                            <table id="update_table">
+                                <tr>
+                                    <th><label for="update_date">Date</label></th>
+                                    <th><label for="update_event">Event</label></th>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <select name="eventID" id="update_eventID">
+                                            <optgroup label="eventID">
+                                                {% for row in table %}
+                                                    <option label="{{ row['EventID'] }}">{{ row['eventID'] }}</option>
+                                                {% endfor %}
+                                            </optgroup>
+                                        </select>
+                                    </td>
+                                    <td><input type="text" name="event" id="update_event" required></td>
+                                    <td><input type="submit" value="Update"></td>
+                                </tr>
+                            </table>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div>
+                        <h2>Delete</h2>
+                        <form method="POST" ID="read" action={{url_for('event.delete')}} >
+                            <table id="read_table">
+                                <tr><th><label for="delete_eventID">Date</label></th></tr>
+                                <tr>
+                                    <td>
+                                        <select name="eventID" id="delete_Event">
+                                            <optgroup label="eventID">
+                                                {% for row in table %}
+                                                    <option label="{{ row['eventID'] }}">{{ row['eventID'] }}</option>
+                                                {% endfor %}
+                                            </optgroup>
+                                        </select>
+                                    </td>
+                                    <td><input type="submit" value="Delete"></td>
+                                </tr>
+                            </table>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+{% endblock %}
