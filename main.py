@@ -67,7 +67,7 @@ def page_not_found(e):
 
 @app.route('/holidaydec/')
 def holidaydec():
-    return render_template("holidaydec.html")
+    return render_template("reddit.html")
 
 
 @app.route('/calendar/')

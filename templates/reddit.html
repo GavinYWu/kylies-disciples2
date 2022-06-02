@@ -1,9 +1,15 @@
+{% extends "layouts/navbar.html" %}
+<!DOCTYPE html>
+{% block body %}
+<html>
+
+
 <p>
 import requests
 
 url = "https://reddit3.p.rapidapi.com/subreddit"
 
-querystring = {"url":"https://www.reddit.com/r/holidaydecorations","filter":"hot"}
+querystring = {"url":"https://www.reddit.com/r/ChristmasDecorating","filter":"decor"}
 
 headers = {
 "X-RapidAPI-Host": "reddit3.p.rapidapi.com",
