@@ -17,7 +17,6 @@ This HTML is setup as a fragment allowing it to be "included" by other HTML file
 {#            <a class="nav-link" href="/holidaydec">Holiday Decor Reddit</a>#}
             <a class="nav-link" href="/calendar2">Calendar</a>
             <a class="nav-link" href="/event">CalEvents</a>
-            <a class="nav-link" href="/ideas">Decor Ideas</a>
             <a class="nav-link" href={{ url_for('crud.crud') }}>CRUD</a>
             {% if current_user.name|length != 0 %}
                 <a class="nav-link" href={{ url_for('crud.logout') }}>Logout</a>

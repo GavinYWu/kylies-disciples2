@@ -1,0 +1,144 @@
+{% extends "layouts/base.html" %}
+
+{% block title %}
+    <title>Announcements</title>
+{% endblock %}
+
+{% block body %}
+    <div class="container py-4">
+    </div>
+    <body>
+    <center>
+        <h3>Announcements</h3>
+        <hr>
+        <!--Notes input form, textarea supports multiple lines of input  -->
+        <form method="POST" ID="create" action={{url_for('announcement.create')}}>
+            <table class="table">
+                <thead>
+                <br>
+                <tr>
+                    <th><label for="content">Post an announcement:</label></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td><textarea rows="5" cols="100%" name="content" id="content" required></textarea></td>
+                    <td><input type="submit" value="Add" ></td>
+                </tr>
+            </table>
+            <div class="divider">
+                <hr class="left"/>
+                Updates:
+                <hr class="right"/>
+                <p><br>
+                    {% for content in ann %}
+                        <tr>
+                            <td><br>{{ content.content | safe }}{{ content.timestamp | safe }}<br><br></td>
+                        </tr>
+                    {% endfor %}
+            </div>
+        </form>
+    </center>
+    </body>
+    <style>
+        h1 {
+            text-align: center;
+            font-size: 24px;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom right, #E3F0FF, #FAFCFF);
+            height: 100vh;
+            justify-content: center;
+            align-items: center;
+        }
+        form {
+            width: 70%;
+            height: 85%;
+            background-color: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0px 25px 40px #1687d933;
+        }
+        hr {
+            width: 24%
+        }
+        .left {
+            float:left;
+        }
+
+        .right {
+            float:right;
+        }
+        .divider {
+            width:500px;
+            text-align:center;
+        }
+
+        .divider hr {
+            margin-left:auto;
+            margin-right:auto;
+            width:40%;
+
+        }
+    </style>
+{% endblock %}
+{% block background %}
+{% endblock %}
+
+
+
+{##}
+{#{% extends "layouts/base.html" %}#}
+{##}
+{#{% block title %}#}
+{#    <title>Announcements</title>#}
+{#{% endblock %}#}
+{##}
+{#{% block body %}#}
+{#    <div class="container py-4">#}
+{#        <header class="pb-3 mb-4 border-bottom border-primary text-dark">#}
+{#            <span class="fs-4">Announcements Page</span>#}
+{#        </header>#}
+{#    </div>#}
+{#    <div class="container py-4 text-light bg-success">#}
+{#        <div class="container bg-secondary py-4">#}
+{#            <div class="p-5 mb-4 bg-light text-dark rounded-3">#}
+{#                <h2>Announcements</h2>#}
+{#                <hr>#}
+{#                <!--Notes input form, textarea supports multiple lines of input  -->#}
+{#                <form method="POST" ID="create" action={{url_for('announcement.create')}}>#}
+{#                    <table class="table">#}
+{#                        <thead>#}
+{#                        <tr>#}
+{#                            <th><label for="content">Post an announcement:</label></th>#}
+{#                        </tr>#}
+{#                        </thead>#}
+{#                        <tbody>#}
+{#                        <tr>#}
+{#                            <td><textarea rows="5" cols="100%" name="content" id="content" required></textarea></td>#}
+{#                            <td><input type="submit" value="Add" ></td>#}
+{#                        </tr>#}
+{#                        </tbody>#}
+{#                    </table>#}
+{#                </form>#}
+{#                <hr>#}
+{#                <!--Notes output area, Jinja lines iterate through notes,#}
+{#                    note.note is html converted from markdown -->#}
+{#                <div class="table-responsive">#}
+{#                    <table class="table">#}
+{#                        <tbody>#}
+{#                        {% for content in ann %}#}
+{#                            <tr>#}
+{#                                <td><br>{{ content.content | safe }}<br>{{ content.timestamp | safe }}</td>#}
+{#                            </tr>#}
+{#                        {% endfor %}#}
+{#                        </tbody>#}
+{#                    </table>#}
+{#                </div>#}
+{##}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{##}
+{#{% endblock %}#}
