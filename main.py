@@ -79,9 +79,11 @@ def ideas():
 def newsletter():
     return render_template("newsletter.html")
 
+
 @app.route('/calendar2/')
 def calen():
     return render_template("calendarevent.html")
+
 
 # runs the application on the development server
 if __name__ == "__main__":
