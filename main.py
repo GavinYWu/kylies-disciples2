@@ -70,6 +70,11 @@ def calendar():
     return render_template("calendar.html")
 
 
+@app.route('/ideas/')
+def ideas():
+    return render_template("Ideas.html")
+
+
 @app.route('/newsletter/')
 def newsletter():
     return render_template("newsletter.html")
