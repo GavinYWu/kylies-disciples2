@@ -5,10 +5,17 @@
     <style>
         .mySlides {display:none;}
 
+        .box {
+            height: 250px;
+            width: 200px;
+            background-color: red;
+            margin-left: 20%;
+            margin-top: 30px;
+        }
     </style>
     <body>
 
-    <div class="w3-content w3-display-container">
+    <div class="w3-content w3-display-container" style="">
 
         <img class="mySlides" src="/static/assets/christmas-party-decorations.jpeg" style="width: 100%; height: 100%">
         <img class="mySlides" src="/static/assets/halloween-party-decorations.jpg" style="width:100%; height: 100%">
@@ -37,7 +44,30 @@
             x[slideIndex-1].style.display = "block";
         }
     </script>
+    <div class="row">
+        <div class="column">
+            <div class="box" style="margin-left: 350px">
+                <p style="color: white; font-size: x-large; margin-top: 20px; margin-left: 20%;">Newsletter</p>
+                <button style="margin-top: 75%; margin-left: 23%">
+                    <a href="/newsletter">Learn More</a>
+                </button>
+            </div>
+        </div>
+        <div class="column">
+            <div class="box" style="margin-left: 350px">
+                <p style="color: white; font-size: large; margin-top: 20px; margin-left: 10%;">Decoration Ideas</p>
+                <button style="margin-top: 75%; margin-left: 7%">
+                    <a class="nav-link" href={{ url_for('crud.crud') }}>Decoration Ideas</a>
+                    {#            {% if current_user.name|length != 0 %}#}
+                    {#                <a class="nav-link" href={{ url_for('crud.logout') }}>Logout</a>#}
+                    {#            {% else %}#}
+                    {#                <a class="nav-link" href={{ url_for('crud.crud_login') }}>Login</a>#}
+                    {#            {% endif %}#}
+                </button>
+        </div>
+    </div>
 
+    </div>
     </body>
     </html>
 
