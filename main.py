@@ -3,11 +3,14 @@ from flask import Flask, render_template, request
 import requests, json
 from __init__ import app
 
-from holidaydecor.app_crud import app_crud
-app.register_blueprint(app_crud)
+# from holidaydecor.app_crud import app_crud
+# app.register_blueprint(app_crud)
+#
+# from event.app_db import app_db
+# app.register_blueprint(app_db)
 
-from event.app_db import app_db
-app.register_blueprint(app_db)
+from cruddy.app_crud import app_crud
+app.register_blueprint(app_crud)
 
 # connects default URL to render index.html
 @app.route('/')
@@ -39,16 +42,6 @@ def hawkers():
 @app.route('/stub/')
 def stub():
     return render_template("stub.html")
-
-
-@app.route('/login/')
-def login():
-    return render_template("login.html")
-
-
-@app.route('/logout/')
-def logout():
-    return render_template("logout.html")
 
 
 @app.route('/feedback/')

@@ -11,16 +11,19 @@ This HTML is setup as a fragment allowing it to be "included" by other HTML file
             <!-- url_for is a Jinja2 pre-processor that finds route from function name (def) -->
             <!-- stub is shown using the name of the route -->
             <a class="nav-link" href="/">Database</a>
-            <a class="nav-link" href="/login">Login</a>
-            <a class="nav-link" href="/logout">Logout</a>
             <a class="nav-link" href="/newsletter">Newsletter</a>
             <a class="nav-link" href="/feedback">Feedback</a>
             <a class="nav-link" href="/suggest">Decor Suggestions</a>
-            <a class="nav-link" href="/holidaydec">Holiday Decor Reddit</a>
+{#            <a class="nav-link" href="/holidaydec">Holiday Decor Reddit</a>#}
             <a class="nav-link" href="/calendar2">Calendar</a>
             <a class="nav-link" href="/event">CalEvents</a>
-            <a class="nav-link" href="/holidaydecor">CRUD</a>
-            <a class="nav-link" href="/holidaydecor/search">Search</a>
+            <a class="nav-link" href={{ url_for('crud.crud') }}>CRUD</a>
+            {% if current_user.name|length != 0 %}
+                <a class="nav-link" href={{ url_for('crud.logout') }}>Logout</a>
+            {% else %}
+                <a class="nav-link" href={{ url_for('crud.crud_login') }}>Login</a>
+            {% endif %}
+{#            <a class="nav-link" href="/holidaydecor/search">Search</a>#}
         </div>
     </div>
 </nav>

@@ -8,5 +8,4 @@ flask_migrate
 flask_restful
 numpy
 Pillow
-
 pygame
